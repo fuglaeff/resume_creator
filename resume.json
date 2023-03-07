@@ -1,0 +1,16 @@
+{
+    "addEnglishVersion": false,
+    "shortInfo": {
+        "photo": "",
+        "name": "",
+        "position": "",
+        "paragraphs": [],
+        "contacts": {}
+    },
+    "sections": {
+        "aboutMe": [],
+        "education": [],
+        "experience": [],
+        "hardSkills": []
+    }
+}
