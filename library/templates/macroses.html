@@ -1,0 +1,103 @@
+{% macro fill(obj) %}
+    {% if isinstance(obj, list) %}
+        {% for item in obj %}
+            {{ fill(item) }}
+        {% endfor %}
+    {% elif isinstance(obj, str) %}
+        {% if obj == "" %}
+            <br>
+        {% else %}
+            <p>{{ obj }}</p>
+        {% endif %}
+    {% elif isinstance(obj, RawTextList) %}
+        {{ fill_list(obj) }}
+    {% elif isinstance(obj, MarkedRawText) %}
+        <p style="float: left; margin-right: 10px;">{{ obj.text|include_links(obj.includes) }} </p>
+        {{ make_mark(obj.mark) }}
+    {% else %}
+        <p>{{ obj.text|include_links(obj.includes) }}</p>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro fill_list(list_obj) %}
+    {% if list_obj.title %}
+        <p><b>{{ list_obj.title }}</b></p>
+    {% endif %}
+    {% if list_obj.type == ListTypes.unordered %}
+        <ul>
+            {% for item in list_obj.items %}
+                <li>{{ fill(item) }}</li>
+            {% endfor %}
+        </ul>
+    {% elif list_obj.type == ListTypes.scroll %}
+        <div class="row row-scroll-x" style="margin-top: 1rem;">
+            {% for item in list_obj.items %}
+                <div class="tech" style="display: inline-block;">
+                    {{ fill(item) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <ol>
+            {% for item in list_obj.items %}
+                <li>{{ fill(item) }}</li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro make_mark(mark) %}
+    <ul class="progress-num">
+        {% for i in range(1, 11) %}
+            <li class="step {{ 'active' if i <= mark }}"></li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+
+{% macro fill_subsection(subsection_obj) %}
+    <div class="row">
+        {% if subsection_obj.date_range %}
+            <div class="dates">
+                <p>{{ subsection_obj.date_range.start }}</p>
+                {% if subsection_obj.date_range.end %}
+                    <p>{{ subsection_obj.date_range.end }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if subsection_obj.elements %}
+            <div class="content {{ 'with-dates' if subsection_obj.date_range }}">
+                {% if subsection_obj.name %}
+                    <p>{{ subsection_obj.name.name }}</p>
+                    {% if subsection_obj.name.subname %}
+                        <p><i class="shadow-italic">{{ subsection_obj.name.subname }}</i></p>
+                    {% endif %}
+                    <br>
+                {% endif %}
+                {% for el in subsection_obj.elements %}
+                    {{ fill(el) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+
+{% macro fill_section(section_obj) %}
+    <div class="container section">
+        <div class="row" style="display: flex;">
+            <h2>{{ section_obj.name }}</h2>
+            <i class="fas fa-chevron-up fa-2x"></i>
+        </div>
+        <div class="block-info" style="display: none;">
+            {% for subsection in section_obj.subsections %}
+                {{ fill_subsection(subsection) }}
+                {% if not loop.last %}
+                    <hr class="line">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

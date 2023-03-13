@@ -1,0 +1,67 @@
+{% import 'macroses.html' as macroses %}
+
+{% extends "base.html" %}
+{% block header %}
+    {% include 'header.html'%}
+{% endblock %}
+{% block main %}
+<div class="main">
+    <div class="row" style="height: 100%; min-height: 650px;">
+        <div class="container short-info">
+
+        </div>
+        <div class="sections">
+            {% for section in resume.sections %}
+                {{ macroses.fill_section(section) }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer%}
+    {% include 'footer.html'%}
+{% endblock %}
+{% block script %}
+
+    Array.from(document.getElementsByClassName('row-scroll-x')).forEach(function (item) {
+        item.onshow = function () {
+            Array.from(item.children).forEach((ch) => {
+                ch.style.height = `${item.offsetHeight}px`;
+            });
+        };
+    });
+
+    Array.from(document.getElementsByClassName('fa-chevron-up')).forEach(function (item) {
+        item.onclick = function () {
+            if (item.classList.contains('deg180')) {
+                item.classList.remove('deg180');
+                item.parentNode.nextElementSibling.style.display = 'none';
+            } else {
+                item.classList.add('deg180');
+                item.parentNode.nextElementSibling.style.display = '';
+            };
+        };
+    });
+
+    document.getElementById('showhide-all').onclick = function () {
+        let elText = this.innerText;
+        Array.from(document.getElementsByClassName('fa-chevron-up')).forEach(function (item) {
+            if (elText === 'Открыть все' && !item.classList.contains('deg180')) {
+                item.classList.add('deg180');
+                item.parentNode.nextElementSibling.style.display = '';
+            };
+
+            if (elText === 'Закрыть все' && item.classList.contains('deg180')) {
+                item.classList.remove('deg180');
+                item.parentNode.nextElementSibling.style.display = 'none';
+            };
+        });
+        if (elText === 'Открыть все') {
+            this.innerText = 'Закрыть все';
+        } else {
+            this.innerText = 'Открыть все';
+        };
+
+    };
+
+{% endblock %}

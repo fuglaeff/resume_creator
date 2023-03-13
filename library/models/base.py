@@ -1,35 +1,42 @@
+from __future__ import annotations
+
 from datetime import datetime
+from enum import Enum
 
 from pydantic import BaseModel
 
 
+class ListTypes(str, Enum):
+    unordered = 'unordered'
+    ordered = 'ordered'
+    scroll = 'scroll'
+
+
+class Name(BaseModel):
+    name: str
+    subname: str | None = None
+
+
 class DateRange(BaseModel):
     start: str | datetime
-    end: str | datetime
+    end: str | datetime | None = None
 
 
 class Link(BaseModel):
-    ref: str
-    name: str
-
-
-class Paragraph(BaseModel):
     text: str
-    links: list[Link]
+    ref: str
 
 
-class Skill(BaseModel):
-    skill: str
+class RawText(BaseModel):
+    text: str
+    includes: list[Link] = []
 
 
-class SkillWithMark(Skill):
+class MarkedRawText(RawText):
     mark: int
 
 
-class SkillsPack(BaseModel):
-    name: str
-    skills: Skill
-
-
-class SkillsPackWithMarks(SkillsPack):
-    skills: SkillWithMark
+class RawTextList(BaseModel):
+    type: ListTypes = ListTypes.unordered
+    title: str | None = None
+    items: list[MarkedRawText] | list[str | RawText | RawTextList]

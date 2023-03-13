@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;1,300&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+  background-color: #23282e;
+  color: #ffffff;
+  position: relative;
+}
+
+.header {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  top: 0;
+}
+
+.footer {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  line-height: 50px;
+}
+
+.main {
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  bottom: 50px;
+}
+
+.row {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.short-info {
+  float: left;
+  width: 300px;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
+.sections {
+  float: left;
+  width: 875px;
+  margin-left: 25px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section > .row {
+    width: 100%;
+}
+
+.sections::-webkit-scrollbar {
+  display: none;
+}
+
+
+hr.line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: radial-gradient(circle, rgba(159,173,178,1) 5%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%);
+  color: #23282e;
+  height: 2px;
+  border: none;
+}
+
+ul {
+  padding: 0;
+  margin-left: 20px;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: #ffffff;
+}
+
+h2 {
+  margin: 0;
+  float: left;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  background-color: #333a46;
+  border-radius: 25px;
+  padding: 25px;
+}
+
+
+
+.block-info {
+  margin-top: 10px;
+}
+
+.block-right:last-of-type {
+  margin-bottom: 0;
+}
+
+.tech {
+  flex: 0 0 auto;
+  background-color: #384252;
+  border-radius: 12px;
+  padding: 12px;
+  margin-right: 10px;
+}
+
+.dates {
+  float: left;
+  width: 100px;
+}
+
+.content {
+  float: left;
+  width: 825px;
+}
+
+.with-dates {
+  float: left;
+  width: 725px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row-scroll-x {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+  display: flex;
+}
+
+.row-scroll-x::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+/* background of the scrollbar except button or resizer */
+.row-scroll-x::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* scrollbar itself */
+.row-scroll-x::-webkit-scrollbar-thumb {
+    background-color: #212833;
+    border-radius: 10px;
+}
+
+/* set button(top and bottom of the scrollbar) */
+.row-scroll-x::-webkit-scrollbar-button {
+    display:none;
+}
+
+.shadow-italic {
+  color: #9fadb2;
+}
+
+.ul-contacts {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+.fa-chevron-up {
+  float: right;
+  margin: auto 0 auto auto;
+  transform: rotate(180deg);
+  transition: transform 0.2s linear;
+}
+
+.deg180 {
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+}
+
+.progress {
+  float: right;
+  width: 250px;
+  height: 1.3rem;
+}
+
+.tech > ul {
+    margin-bottom: 0;
+}
+
+.progress-num {
+  margin: auto 0 auto auto;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  float: right;
+}
+
+.progress-num .step {
+  border-radius: 100%;
+  width: 1rem;
+  height: 1rem;
+  background-color: #9fadb2;
+  margin-right: 5px;
+}
+
+.progress-num .step.active {
+  background-color: #dc5539;
+}
+
+.step:last-child {
+  margin-right: 0;
+}
+
+.header.container, .footer.container {
+  float: right;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+.btn {
+    float: right;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 4px;
+}
